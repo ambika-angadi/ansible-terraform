@@ -1,0 +1,43 @@
+---
+- name: Intro to Ansible Playbooks
+  hosts: all
+
+  tasks:
+  - name: Add the user 'foo'
+    ansible.builtin.user:
+      name: foo
+    become: yes
+    become_method: sudo
+  - name: upgrade all packages
+    dnf:
+      name: '*'
+      state: latest
+    become: yes
+  - name: install the latest version of nano
+    dnf:
+      name: nano
+      state: latest
+    become: yes
+  - name: install the latest version of vim
+    dnf:
+      name: vim
+      state: latest
+    become: yes
+  - name: install the latest version of apache
+    dnf:
+      name: httpd
+      state: latest
+    become: yes
+
+  - name: Create Web Root directory
+    file:
+      path: /var/www/html
+      state: directory
+
+  - name: Copy index.html to Web Root
+    copy:
+      src:  /mnt/c/Users/ambis/ue126-ansible-terraform/index.html 
+      dest: /var/www/html/index.html   
+    become: yes
+
+    
